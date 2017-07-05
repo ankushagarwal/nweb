@@ -91,6 +91,8 @@ void web(int fd, int hit)
       break;
     }
   }
+  if(buffer[5] == '/') /* check for illegal absolute directory path use */
+      logger(FORBIDDEN,"Absolute directory (/) path names not supported",buffer,fd);
   for(j=0;j<i-1;j++)   /* check for illegal parent directory use .. */
     if(buffer[j] == '.' && buffer[j+1] == '.') {
       logger(FORBIDDEN,"Parent directory (..) path names not supported",buffer,fd);
