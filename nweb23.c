@@ -21,8 +21,8 @@
 #endif
 
 struct {
-  char *ext;
-  char *filetype;
+  const char *ext;
+  const char *filetype;
 } extensions [] = {
   {"gif", "image/gif" },
   {"jpg", "image/jpg" },
@@ -36,7 +36,7 @@ struct {
   {"html","text/html" },
   {0,0} };
 
-void logger(int type, char *s1, char *s2, int socket_fd)
+void logger(int type, const char *s1, const char *s2, int socket_fd)
 {
   int fd ;
   char logbuffer[BUFSIZE*2];
@@ -68,7 +68,7 @@ void web(int fd, int hit)
 {
   int j, file_fd, buflen;
   long i, ret, len;
-  char * fstr;
+  const char * fstr;
   static char buffer[BUFSIZE+1]; /* static so zero filled */
 
   ret =read(fd,buffer,BUFSIZE);   /* read Web request in one go */
@@ -100,7 +100,7 @@ void web(int fd, int hit)
 
   /* work out the file type and check we support it */
   buflen=strlen(buffer);
-  fstr = (char *)0;
+  fstr = NULL;
   for(i=0;extensions[i].ext != 0;i++) {
     len = strlen(extensions[i].ext);
     if( !strncmp(&buffer[buflen-len], extensions[i].ext, len)) {
