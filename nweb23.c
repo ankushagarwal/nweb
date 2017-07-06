@@ -34,6 +34,8 @@ struct {
   {"tar", "image/tar" },
   {"htm", "text/html" },
   {"html","text/html" },
+  {"json","application/json" },
+  {"pdf","application/pdf"},
   {0,0} };
 
 void logger(int type, char *s1, char *s2, int socket_fd)
@@ -108,7 +110,7 @@ void web(int fd, int hit)
       break;
     }
   }
-  if(fstr == 0) logger(FORBIDDEN,"file extension type not supported",buffer,fd);
+  if(fstr == 0) fstr = "application/octet-stream";
 
   if(( file_fd = open(&buffer[5],O_RDONLY)) == -1) {  /* open the file for reading */
     logger(NOTFOUND, "failed to open file",&buffer[5],fd);
