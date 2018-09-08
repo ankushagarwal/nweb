@@ -36,7 +36,7 @@ static struct sockaddr_in serv_addr;
 	serv_addr.sin_addr.s_addr = inet_addr(IP_ADDRESS);
 	serv_addr.sin_port = htons(PORT);
 
-	/* Connect tot he socket offered by the web server */
+	/* Connect to the socket offered by the web server */
 	if(connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) <0) 
 		pexit("connect() failed");
 
