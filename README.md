@@ -234,7 +234,3 @@ __unam=693fb60-1337f162b72-11770d11-5; WLS_ intra_USERID=nigel@hotmail.com;
 ipcInfo=cc%3Duk%3Blc%3Den%3Bac%3Dall; iwm1p=214617669; bprememberme=nigel@ hotmail.com; 
 EPSPROFILE=EE2355DFE16AE020BE6C62FCB6BF5602; DWPERM=Xa.2/Xb.Xzso3-U35t8RWKvqBreGaQMgsP_RG 
 Fl1124oIt-L-OPJIdSautkBN0D4NUp9JLlpUqPqB6CWOo-pgrJwhxNvvSfPAajgetaA2MOYwHfQPXPTRG9zwOMMR57EHQtXhOy5Om yzanyZthvVClm6uxvbwh0isEQ2Mm_9g2l7NjcA3RJdjuLaB3qlljOmyVuhDjBkgdNEb3PgYcCpbiu1FUzXrhPalhgsbAj7NBkaY88 Yyg/Xc./Xd./Xf./Xg.1696801 
-
-
-I hope this has been instructive, thanks, Nigel Griffiths
-
