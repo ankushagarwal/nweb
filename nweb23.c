@@ -148,7 +148,7 @@ int main(int argc, char **argv)
   "\tnweb only servers out file/web pages with extensions named below\n"
   "\t and only from the named directory or its sub-directories.\n"
   "\tThere is no fancy features = safe and secure.\n\n"
-  "\tExample: nweb 8181 /home/nwebdir --daemon &\n\n"
+  "\tExample: nweb 8181 /home/nwebdir --no-daemon &\n\n"
   "\tOnly Supports:", VERSION);
     for(i=0;extensions[i].ext != 0;i++)
       (void)printf(" %s",extensions[i].ext);
@@ -170,7 +170,7 @@ int main(int argc, char **argv)
     exit(4);
   }
   /* Become deamon + unstopable and no zombies children (= no wait()) */
-  if(argc == 4 && !strcmp(argv[3] ,"--daemon")){ 
+  if(argc == 3){
     if(fork() != 0)
       return 0; /* parent returns OK to shell */
     (void)signal(SIGCLD, SIG_IGN); /* ignore child death */
@@ -178,7 +178,10 @@ int main(int argc, char **argv)
     for(i=0;i<32;i++)
       (void)close(i);    /* close open files */
     (void)setpgrp();    /* break away from process group */
-  }
+  }else if(argc == 4 && strcmp(argv[3] ,"--no-daemon")){ 
+    (void)printf("ERROR: wrong arg %s, only correct: --no-daemon \n",argv[3]);
+    exit(4);
+  } 
   logger(LOG,"nweb starting",argv[1],getpid());
   /* setup the network socket */
   if((listenfd = socket(AF_INET, SOCK_STREAM,0)) <0)
