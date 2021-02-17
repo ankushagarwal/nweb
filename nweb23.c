@@ -182,6 +182,7 @@ int main(int argc, char **argv)
     (void)printf("ERROR: wrong arg %s, only correct: --no-daemon \n",argv[3]);
     exit(4);
   } 
+
   logger(LOG,"nweb starting",argv[1],getpid());
   /* setup the network socket */
   if((listenfd = socket(AF_INET, SOCK_STREAM,0)) <0)
