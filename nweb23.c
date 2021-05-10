@@ -34,6 +34,10 @@ struct {
   {"tar", "image/tar" },
   {"htm", "text/html" },
   {"html","text/html" },
+  {"json","application/json" },
+  {"pdf","application/pdf"},
+  {"css","text/css"},
+  {"js","application/javascript"},
   {0,0} };
 
 void logger(int type, char *s1, char *s2, int socket_fd)
@@ -91,6 +95,8 @@ void web(int fd, int hit)
       break;
     }
   }
+  if(buffer[5] == '/') /* check for illegal absolute directory path use */
+      logger(FORBIDDEN,"Absolute directory (/) path names not supported",buffer,fd);
   for(j=0;j<i-1;j++)   /* check for illegal parent directory use .. */
     if(buffer[j] == '.' && buffer[j+1] == '.') {
       logger(FORBIDDEN,"Parent directory (..) path names not supported",buffer,fd);
@@ -108,7 +114,7 @@ void web(int fd, int hit)
       break;
     }
   }
-  if(fstr == 0) logger(FORBIDDEN,"file extension type not supported",buffer,fd);
+  if(fstr == 0) fstr = "application/octet-stream";
 
   if(( file_fd = open(&buffer[5],O_RDONLY)) == -1) {  /* open the file for reading */
     logger(NOTFOUND, "failed to open file",&buffer[5],fd);
@@ -136,13 +142,13 @@ int main(int argc, char **argv)
   static struct sockaddr_in cli_addr; /* static = initialised to zeros */
   static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 
-  if( argc < 3  || argc > 3 || !strcmp(argv[1], "-?") ) {
+  if( argc < 3  || argc > 4 || !strcmp(argv[1], "-?") ) {
     (void)printf("hint: nweb Port-Number Top-Directory\t\tversion %d\n\n"
   "\tnweb is a small and very safe mini web server\n"
   "\tnweb only servers out file/web pages with extensions named below\n"
   "\t and only from the named directory or its sub-directories.\n"
   "\tThere is no fancy features = safe and secure.\n\n"
-  "\tExample: nweb 8181 /home/nwebdir &\n\n"
+  "\tExample: nweb 8181 /home/nwebdir --no-daemon &\n\n"
   "\tOnly Supports:", VERSION);
     for(i=0;extensions[i].ext != 0;i++)
       (void)printf(" %s",extensions[i].ext);
@@ -164,13 +170,19 @@ int main(int argc, char **argv)
     exit(4);
   }
   /* Become deamon + unstopable and no zombies children (= no wait()) */
-  if(fork() != 0)
-    return 0; /* parent returns OK to shell */
-  (void)signal(SIGCLD, SIG_IGN); /* ignore child death */
-  (void)signal(SIGHUP, SIG_IGN); /* ignore terminal hangups */
-  for(i=0;i<32;i++)
-    (void)close(i);    /* close open files */
-  (void)setpgrp();    /* break away from process group */
+  if(argc == 3){
+    if(fork() != 0)
+      return 0; /* parent returns OK to shell */
+    (void)signal(SIGCLD, SIG_IGN); /* ignore child death */
+    (void)signal(SIGHUP, SIG_IGN); /* ignore terminal hangups */
+    for(i=0;i<32;i++)
+      (void)close(i);    /* close open files */
+    (void)setpgrp();    /* break away from process group */
+  }else if(argc == 4 && strcmp(argv[3] ,"--no-daemon")){ 
+    (void)printf("ERROR: wrong arg %s, only correct: --no-daemon \n",argv[3]);
+    exit(4);
+  } 
+
   logger(LOG,"nweb starting",argv[1],getpid());
   /* setup the network socket */
   if((listenfd = socket(AF_INET, SOCK_STREAM,0)) <0)
