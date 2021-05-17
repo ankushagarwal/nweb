@@ -1,4 +1,8 @@
-nweb README for version 23
+# nweb README for version 25
+
+http://nmon.sourceforge.net/pmwiki.php?n=Site.Nweb
+
+stunnel for https? http://www.acme.com/software/micro_httpd/
 
 1) Bug fixed - was duplicating errors in the nweb.log file 
    - thanks to Kieran Grant for stopping this and pointing out the fix.
