@@ -43,6 +43,7 @@ nweb executable files for:
 	SUSE SLES 11 for x86_64     Intel/AMD 64 bit
 	Debian Squeeze for ARM on Raspberry Pi 
 ```
+* No executable files in here, since this is the source distribution. Find outdated versions in binary form here https://repology.org/project/nweb/versions or a debian source/binary packaging here https://sid.ethz.ch/debian/nweb/
 
 Minimum test website
 ```
@@ -156,7 +157,7 @@ Good example
 Here is an edited down sample nweb.log file. 
 Note the first line = "starting" looks good as there is no following error.
 
-----
+```
  INFO: nweb starting:8181:8913126
  INFO: request:GET /index.html HTTP/1.1 [[1KB of deleted request stuff here]]:2
  INFO: SEND:index.html:2
@@ -173,16 +174,15 @@ Server: nweb/21.0
 Content-Length: 10184
 Connection: close
 Content-Type: image/jpg
----- 
+```
 
 Bad example
 A failure to start due to the port number is not aallowed or in use looks like:
 
+```
  INFO: nweb starting:80:8323296
 ERROR: system call:bind Errno=13 exiting pid=8323296
-
-----
-
+```
 
 client.c
 ========
@@ -193,21 +193,23 @@ socket connection and displays the results as text rather than
 graphically displaying the results.  In the code you will have to 
 change the two lines as below to match your web server or nweb server.
 
+```
 /* YOU WILL HAVE TO CHANGE THESE TWO LINES TO MATCH YOUR CONFIG */
 #define PORT        8181		/* Port number as an integer - web server default is 80 */
 #define IP_ADDRESS "192.168.0.8"	/* IP Address as a string */
+```
 
 The default is to request the /index.html from the web server. 
 If you want to request another file then change the GET line as below:
 
-char *command = "GET /index.html HTTP/1.0 \r\n\r\n" ;
+`char *command = "GET /index.html HTTP/1.0 \r\n\r\n";`
 
 To, for example:
 
-char *command = "GET /nigel.jpg HTTP/1.0 \r\n\r\n" ;
+`char *command = "GET /nigel.jpg HTTP/1.0 \r\n\r\n";`
 
 
-Then compile the program with: cc client.c -o client
+Then compile the program with: `cc client.c -o client`
 
 I save the output in to a file as putting a non-test file like .jpg to the 
 terminal screen can cause chaos: client >output
@@ -228,6 +230,7 @@ I have no idea what most of it is about.
 You will have to read the The World Wide Web Consortium (W3C) at 
 http://www.w3.org for all the details.
 
+```
 GET /index.html HTTP/1.1**Host: myserver.home.com:80**User-Agent: Mozilla/5.0 
 (W indows; U; Windows NT 5.1; en-GB; rv:1.9.2.28) Gecko/20120306 Firefox/3.6.28 
 (.NET CLR 3.5.30729)**Ac cept: image/png,image/*;q=0.8,*/*;q=0.5**Accept-Language: 
@@ -243,7 +246,7 @@ __unam=693fb60-1337f162b72-11770d11-5; WLS_ intra_USERID=nigel@hotmail.com;
 ipcInfo=cc%3Duk%3Blc%3Den%3Bac%3Dall; iwm1p=214617669; bprememberme=nigel@ hotmail.com; 
 EPSPROFILE=EE2355DFE16AE020BE6C62FCB6BF5602; DWPERM=Xa.2/Xb.Xzso3-U35t8RWKvqBreGaQMgsP_RG 
 Fl1124oIt-L-OPJIdSautkBN0D4NUp9JLlpUqPqB6CWOo-pgrJwhxNvvSfPAajgetaA2MOYwHfQPXPTRG9zwOMMR57EHQtXhOy5Om yzanyZthvVClm6uxvbwh0isEQ2Mm_9g2l7NjcA3RJdjuLaB3qlljOmyVuhDjBkgdNEb3PgYcCpbiu1FUzXrhPalhgsbAj7NBkaY88 Yyg/Xc./Xd./Xf./Xg.1696801 
-
+```
 
 I hope this has been instructive, thanks, Nigel Griffiths
 
