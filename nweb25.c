@@ -170,8 +170,8 @@ int main(int argc, char **argv)
 	if((listenfd = socket(AF_INET, SOCK_STREAM,0)) <0)
 		logger(ERROR, "system call","socket",0);
 	port = atoi(argv[1]);
-	if(port < 0 || port >60000)
-		logger(ERROR,"Invalid port number (try 1->60000)",argv[1],0);
+	if(port < 0 || port >65535)
+		logger(ERROR,"Invalid port number (try 0->65535)",argv[1],0);
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	serv_addr.sin_port = htons(port);
