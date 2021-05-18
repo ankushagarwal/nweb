@@ -45,6 +45,9 @@ nweb executable files for:
 ```
 * No executable files in here, since this is the source distribution. Find outdated versions in binary form here https://repology.org/project/nweb/versions or a debian source/binary packaging here https://sid.ethz.ch/debian/nweb/
 
+* A much nicer way is to run it in interpreted C with [tcc](https://bellard.org/tcc/), by adding this line to the .c file and making it executable (`chmod +x nweb.c`) 
+`#!/usr/bin/tcc -run`
+
 Minimum test website
 ```
 	index.html  -- test very bascis web page 
