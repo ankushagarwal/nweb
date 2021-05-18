@@ -48,8 +48,8 @@ nweb executable files for:
 Minimum test website
 ```
 	index.html  -- test very bascis web page 
-	nigel.jpg   -- test image file
-	favicon.ico -- the favourite icon bit map file
+	nigel.jpg   -- test image file (optional)
+	favicon.ico -- the favourite icon bitmap file (optional)
 ```
 
 -----------------
