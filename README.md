@@ -137,7 +137,7 @@ nweb will behave like a daemon process, so it disconnects from the
 users command shell, goes into the back ground, closes input and 
 output I/O & protects itself from you logging off.  
 It will look like it stopped, when it is in fact still running in 
-the background - check with ps -ef | grep nweb
+the background - check with `ps -ef | grep nweb`
 Also note you will not see errors or warnings messages 
 - they go in the log file.
 
