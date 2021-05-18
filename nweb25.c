@@ -25,7 +25,10 @@ struct {
 	{"gif", "image/gif" },  {"jpg", "image/jpg" }, {"jpeg","image/jpeg"},
 	{"png", "image/png" },  {"ico", "image/ico" },  {"zip", "image/zip" },
 	{"gz",  "image/gz"  },  {"tar", "image/tar" },  {"htm", "text/html" },
-	{"html","text/html" },  {"css","text/css"   }, {0,0} };
+	{"html","text/html" },  {"css","text/css"   },  {"txt","text/plain" },
+	{"js", "application/javascript" },     {"m", "application/octet-stream" },
+        {"wasm", "application/octet-stream" }, {"c", "application/octet-stream" },
+        {"cc","application/octet-stream" },   {"map","application/octet-stream" }, {0,0} };
 
 void logger(int type, char *s1, char *s2, int socket_fd)
 {
