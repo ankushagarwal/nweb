@@ -80,9 +80,9 @@ I started with a target 100 lines and it worked fine too but then
 added comments, file type checks,
 security checks, sensible directory checks and logging.
 
-To compile this you need a basic C compiler use: cc nweb22.c -o nweb
+To compile this you need a basic C compiler use: `cc nweb22.c -o nweb`
 If you want it to run faster you could include optimisation: 
-cc -O2 nweb22.c -o nweb
+`cc -O2 nweb22.c -o nweb`
 
 Then to run it as root for the test files:
 1) Place the index.html file and nigel.jpg in to a sensible directory 
@@ -90,7 +90,7 @@ Then to run it as root for the test files:
 	A director in /home would be a good idea - below we use /home/nigel/web
 
 2) Make these files readable
-	chmod ugo+r /home/nigel/web
+	`chmod ugo+r /home/nigel/web`
 
 3) Decide the port number
 	Port number 80 is the web server default and assumed by web browsers.
@@ -126,7 +126,7 @@ of abc123.com browser to:
 7) Running nweb as a regualr user
 You can run nweb as a regular user on some operating systems but not all.
 I find using sudo works on some: 
-	sudo /home/nigel/bin/nweb 80   /home/nigel/web
+	`sudo /home/nigel/bin/nweb 80   /home/nigel/web`
 
 If you try and the log file reports socect connections errors worth 
 	trying the 8181 port or higher numbers.  This is because 
@@ -142,16 +142,16 @@ Also note you will not see errors or warnings messages
 - they go in the log file.
 
 Look in the nweb.log file for problems starting up or browsers connecting 
-and requesting pages with: cat nweb.log
-or: tail -f nweb.log
+and requesting pages with: `cat nweb.log`
+or: `tail -f nweb.log`
 
 I find it good to remove the nweb.log before I start nweb or it is easy to get confused with previous error messages in the log.
 
 9) As nweb runs as a daemon process it will try to run forever and not 
 conntected to your user or terminal session.  Logging out will not 
 effect it. To stop nweb you have to stop it by a KILL signal. 
-Find the nweb process with: ps -ef | grep nweb
-Then use: kill -9 PID 
+Find the nweb process with: `ps -ef | grep nweb`
+Then use: `kill -9 PID`
 to stop the nweb process.
 
 
